@@ -1,0 +1,59 @@
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+type Item {
+    itemId: ID!
+    name: String
+    description: String
+    category: String
+    quantity: Int
+    price: Int       
+    imageUrl: AWSURL
+    createdAt: AWSDateTime
+    updatedAt: AWSDateTime
+}
+
+type ItemConnection {
+    items: [Item]
+    nextToken: String
+}
+
+type Query {
+    getItem(itemId: ID!): Item
+    listItems(limit: Int, nextToken: String): ItemConnection
+}
+
+input CreateItemInput {
+    itemId: ID!
+    name: String
+    description: String
+    category: String
+    quantity: Int
+    price: Int
+    imageUrl: AWSURL
+    createdAt: AWSDateTime
+    updatedAt: AWSDateTime
+}
+
+input UpdateItemInput {
+    itemId: ID!
+    name: String
+    description: String
+    category: String
+    quantity: Int
+    price: Int
+    imageUrl: AWSURL
+    updatedAt: AWSDateTime
+}
+
+input DeleteItemInput {
+    itemId: ID!
+}
+
+type Mutation {
+    createItem(input: CreateItemInput!): Item
+    updateItem(input: UpdateItemInput!): Item
+    deleteItem(input: DeleteItemInput!): Item
+}
